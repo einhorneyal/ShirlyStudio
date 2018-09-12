@@ -6,26 +6,25 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ShirlyStudio.Models;
-using WebApplication4.Models;
 
 namespace ShirlyStudio.Controllers
 {
-    public class CustomersController : Controller
+    public class CategoriesController : Controller
     {
         private readonly ShirlyStudioContext _context;
 
-        public CustomersController(ShirlyStudioContext context)
+        public CategoriesController(ShirlyStudioContext context)
         {
             _context = context;
         }
 
-        // GET: Customers
+        // GET: Categories
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Customer.ToListAsync());
+            return View(await _context.Category.ToListAsync());
         }
 
-        // GET: Customers/Details/5
+        // GET: Categories/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +32,39 @@ namespace ShirlyStudio.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customer
+            var category = await _context.Category
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (customer == null)
+            if (category == null)
             {
                 return NotFound();
             }
 
-            return View(customer);
+            return View(category);
         }
 
-        // GET: Customers/Create
+        // GET: Categories/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Customers/Create
+        // POST: Categories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Age,Email,PhoneNumber")] Customer customer)
+        public async Task<IActionResult> Create([Bind("Id,Name")] Category category)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(customer);
+                _context.Add(category);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(customer);
+            return View(category);
         }
 
-        // GET: Customers/Edit/5
+        // GET: Categories/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +72,22 @@ namespace ShirlyStudio.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customer.FindAsync(id);
-            if (customer == null)
+            var category = await _context.Category.FindAsync(id);
+            if (category == null)
             {
                 return NotFound();
             }
-            return View(customer);
+            return View(category);
         }
 
-        // POST: Customers/Edit/5
+        // POST: Categories/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Age,Email,PhoneNumber")] Customer customer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Category category)
         {
-            if (id != customer.Id)
+            if (id != category.Id)
             {
                 return NotFound();
             }
@@ -97,12 +96,12 @@ namespace ShirlyStudio.Controllers
             {
                 try
                 {
-                    _context.Update(customer);
+                    _context.Update(category);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CustomerExists(customer.Id))
+                    if (!CategoryExists(category.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +112,10 @@ namespace ShirlyStudio.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(customer);
+            return View(category);
         }
 
-        // GET: Customers/Delete/5
+        // GET: Categories/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +123,30 @@ namespace ShirlyStudio.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customer
+            var category = await _context.Category
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (customer == null)
+            if (category == null)
             {
                 return NotFound();
             }
 
-            return View(customer);
+            return View(category);
         }
 
-        // POST: Customers/Delete/5
+        // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var customer = await _context.Customer.FindAsync(id);
-            _context.Customer.Remove(customer);
+            var category = await _context.Category.FindAsync(id);
+            _context.Category.Remove(category);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CustomerExists(int id)
+        private bool CategoryExists(int id)
         {
-            return _context.Customer.Any(e => e.Id == id);
+            return _context.Category.Any(e => e.Id == id);
         }
     }
 }

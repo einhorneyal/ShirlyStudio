@@ -97,8 +97,6 @@ namespace ShirlyStudio.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<int>("MyProperty");
-
                     b.Property<string>("Name");
 
                     b.Property<int?>("TeacherId");

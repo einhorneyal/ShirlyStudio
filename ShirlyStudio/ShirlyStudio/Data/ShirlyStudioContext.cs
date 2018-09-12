@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using WebApplication4.Models;
+using ShirlyStudio.Models;
 
 namespace ShirlyStudio.Models
 {
@@ -21,5 +22,7 @@ namespace ShirlyStudio.Models
         public DbSet<WebApplication4.Models.Customer> Customer { get; set; }
 
         public DbSet<WebApplication4.Models.Transaction> Transaction { get; set; }
+
+        public DbSet<ShirlyStudio.Models.Category> Category { get; set; }
     }
 }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShirlyStudio.Models;
 
 namespace ShirlyStudio.Migrations
 {
     [DbContext(typeof(ShirlyStudioContext))]
-    partial class ShirlyStudioContextModelSnapshot : ModelSnapshot
+    [Migration("20180912195512_change_props1")]
+    partial class change_props1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,28 +29,13 @@ namespace ShirlyStudio.Migrations
 
                     b.Property<string>("Name");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("Category");
-                });
-
-            modelBuilder.Entity("ShirlyStudio.Models.WorkshopCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CategoryId");
-
-                    b.Property<int>("WorkshopId");
+                    b.Property<int?>("WorkshopId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
 
                     b.HasIndex("WorkshopId");
 
-                    b.ToTable("WorkshopCategory");
+                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("WebApplication4.Models.Customer", b =>
@@ -61,9 +48,9 @@ namespace ShirlyStudio.Migrations
 
                     b.Property<string>("Email");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Phone");
 
-                    b.Property<string>("PhoneNumber");
+                    b.Property<string>("name");
 
                     b.HasKey("Id");
 
@@ -89,11 +76,13 @@ namespace ShirlyStudio.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CustomerIdId");
+                    b.Property<string>("Customer_name");
+
+                    b.Property<double>("Price");
+
+                    b.Property<string>("Workshop_name");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CustomerIdId");
 
                     b.ToTable("Transaction");
                 });
@@ -108,54 +97,33 @@ namespace ShirlyStudio.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<DateTime>("FullData");
-
                     b.Property<string>("Name");
 
-                    b.Property<int>("Price");
+                    b.Property<int?>("TeacherId");
 
-                    b.Property<int?>("TeacherIdId");
+                    b.Property<DateTime>("Time");
 
-                    b.Property<int?>("TransactionIdId");
+                    b.Property<int>("price");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TeacherIdId");
-
-                    b.HasIndex("TransactionIdId");
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("Workshop");
                 });
 
-            modelBuilder.Entity("ShirlyStudio.Models.WorkshopCategory", b =>
+            modelBuilder.Entity("ShirlyStudio.Models.Category", b =>
                 {
-                    b.HasOne("ShirlyStudio.Models.Category", "Category")
-                        .WithMany("WorkshopCategory")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("WebApplication4.Models.Workshop", "Workshop")
-                        .WithMany("WorkshopCategory")
-                        .HasForeignKey("WorkshopId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("WebApplication4.Models.Transaction", b =>
-                {
-                    b.HasOne("WebApplication4.Models.Customer", "CustomerId")
-                        .WithMany("Transaction")
-                        .HasForeignKey("CustomerIdId");
+                    b.HasOne("WebApplication4.Models.Workshop")
+                        .WithMany("Catagory")
+                        .HasForeignKey("WorkshopId");
                 });
 
             modelBuilder.Entity("WebApplication4.Models.Workshop", b =>
                 {
-                    b.HasOne("WebApplication4.Models.Teacher", "TeacherId")
-                        .WithMany("Workshops")
-                        .HasForeignKey("TeacherIdId");
-
-                    b.HasOne("WebApplication4.Models.Transaction", "TransactionId")
-                        .WithMany("Workshop")
-                        .HasForeignKey("TransactionIdId");
+                    b.HasOne("WebApplication4.Models.Teacher", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId");
                 });
 #pragma warning restore 612, 618
         }

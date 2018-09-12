@@ -54,7 +54,7 @@ namespace ShirlyStudio.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,MyProperty,Time,Available_Members,Description")] Workshop workshop)
+        public async Task<IActionResult> Create([Bind("Id,Name,FullData,Price,Available_Members,Description")] Workshop workshop)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace ShirlyStudio.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,MyProperty,Time,Available_Members,Description")] Workshop workshop)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,FullData,Price,Available_Members,Description")] Workshop workshop)
         {
             if (id != workshop.Id)
             {

@@ -12,5 +12,6 @@ namespace WebApplication4.Models
     {
         public int Id { get; set; }
         public String Name { get; set; }
+        public ICollection<Workshop> Workshops { get; set; }
     }
 }

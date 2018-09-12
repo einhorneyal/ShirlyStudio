@@ -60,7 +60,6 @@ namespace ShirlyStudio.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     TeacherId = table.Column<int>(nullable: true),
-                    MyProperty = table.Column<int>(nullable: false),
                     Time = table.Column<DateTime>(nullable: false),
                     Available_Members = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true)
