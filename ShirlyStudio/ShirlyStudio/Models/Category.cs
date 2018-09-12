@@ -7,6 +7,7 @@ namespace ShirlyStudio.Models
 {
     public class Category
     {
+        //chack
         public int Id { get; set; }
         public String Name { get; set; }
         public ICollection<WorkshopCategory> WorkshopCategory { get; set; }
