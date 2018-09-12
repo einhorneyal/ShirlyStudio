@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using ShirlyStudio.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ShirlyStudio.Models;
 
 namespace ShirlyStudio
 {
@@ -41,6 +42,9 @@ namespace ShirlyStudio
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddDbContext<ShirlyStudioContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("ShirlyStudioContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
