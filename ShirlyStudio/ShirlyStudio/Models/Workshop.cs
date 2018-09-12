@@ -1,15 +1,18 @@
-﻿using System;
+﻿using ShirlyStudio.Models;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebApplication4.Models
 {
+ 
     public class Workshop
     {
         public int Id { get; set; }
         public String Name { get; set; }
-        public Catagory Catagory { get; set; }
+        public ICollection<Category> Catagory { get; set; }
         public Teacher Teacher { get; set; }
         public int MyProperty { get; set; }
         public DateTime Time { get; set; }

@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApplication4.Models
+namespace ShirlyStudio.Models
 {
-
-
-    public class Teacher
+    public class Category
     {
         public int Id { get; set; }
         public String Name { get; set; }
