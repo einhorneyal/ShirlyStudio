@@ -20,13 +20,27 @@ namespace ShirlyStudio.Controllers
         }
 
         // GET: Workshops
-        public async Task<IActionResult> Index()
+          public async Task<IActionResult> Index()
         {
             return View(await _context.Workshop.ToListAsync());
-        }
+         }
 
-        // GET: Workshops/Details/5
-        public async Task<IActionResult> Details(int? id)
+       // public ActionResult Index()
+        //{
+          //  IList<WorkshopCategory> list = new List<WorkshopCategory>();
+            //for (int i = 0; i < 10; i++)
+            //{
+              //  list.Add(new WorkshopCategory { Id = i });
+            //}
+
+            //return View(list);
+       // }
+
+//    }
+
+
+    // GET: Workshops/Details/5
+    public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
