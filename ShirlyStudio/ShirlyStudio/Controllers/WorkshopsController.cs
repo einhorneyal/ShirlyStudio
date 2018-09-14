@@ -20,27 +20,17 @@ namespace ShirlyStudio.Controllers
         }
 
         // GET: Workshops
-          public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index()
         {
-            return View(await _context.Workshop.ToListAsync());
-         }
-
-       // public ActionResult Index()
-        //{
-          //  IList<WorkshopCategory> list = new List<WorkshopCategory>();
-            //for (int i = 0; i < 10; i++)
-            //{
-              //  list.Add(new WorkshopCategory { Id = i });
-            //}
-
-            //return View(list);
-       // }
-
-//    }
+          return View(await _context.Workshop.ToListAsync());
+        }
 
 
-    // GET: Workshops/Details/5
-    public async Task<IActionResult> Details(int? id)
+
+ 
+
+        // GET: Workshops/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -60,8 +50,27 @@ namespace ShirlyStudio.Controllers
         // GET: Workshops/Create
         public IActionResult Create()
         {
+            //Create db context object here 
+            // ShirlyStudioContext dbContext = _context;
+            //Get the value from database and then set it to ViewBag to pass it View
+            //Change here to select the value from Book table instead of departments
+            //Here you can use your linq code
+          //  var Categories = from C in _context.Category
+            //                 select C.Name;
+
+
+
+
+            ViewBag.Name = new SelectList(_context.Category.Include(c => c.WorkshopCategory), "Id", "Name");
+
             return View();
-        }
+         
+
+                //Assign the value to ViewBag
+                //  ViewBag.DropdownValues = items;
+                //  return View(ViewBag);
+            }
+        
 
         // POST: Workshops/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

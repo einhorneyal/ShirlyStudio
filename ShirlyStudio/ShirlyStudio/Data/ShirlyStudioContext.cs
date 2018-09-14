@@ -10,6 +10,10 @@ namespace ShirlyStudio.Models
 {
     public class ShirlyStudioContext : DbContext
     {
+        public ShirlyStudioContext()
+        {
+        }
+
         public ShirlyStudioContext (DbContextOptions<ShirlyStudioContext> options)
             : base(options)
         {

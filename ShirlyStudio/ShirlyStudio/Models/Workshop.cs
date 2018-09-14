@@ -1,4 +1,5 @@
-﻿using ShirlyStudio.Models;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using ShirlyStudio.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,13 +11,16 @@ namespace WebApplication4.Models
  
     public class Workshop
     {
+        [Key]
         public int Id { get; set; }
         public String Name { get; set; }
         public ICollection<WorkshopCategory> WorkshopCategory { get; set; }
         public DateTime FullData { get; set; }
         public int Price { get; set; }
+ //      public String SelectedCategory { get; set; }
+ //  public SelectList CategoryList { get; set; }
 
-        [Display (Name= "Number of available seats")]
+[Display (Name= "Number of available seats")]
         public int Available_Members { get; set; }
         public String Description { get; set; }
 
