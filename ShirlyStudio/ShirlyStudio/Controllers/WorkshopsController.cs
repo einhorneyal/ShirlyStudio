@@ -19,28 +19,20 @@ namespace ShirlyStudio.Controllers
             _context = context;
         }
 
-        // GET: Workshops
-          public async Task<IActionResult> Index()
+       //  GET: Workshops
+           public async Task<IActionResult> Index()
         {
-            return View(await _context.Workshop.ToListAsync());
-         }
+           return View(await _context.Workshop.ToListAsync());
+        }
 
-       // public ActionResult Index()
-        //{
-          //  IList<WorkshopCategory> list = new List<WorkshopCategory>();
-            //for (int i = 0; i < 10; i++)
-            //{
-              //  list.Add(new WorkshopCategory { Id = i });
-            //}
-
-            //return View(list);
-       // }
-
-//    }
+ 
 
 
-    // GET: Workshops/Details/5
-    public async Task<IActionResult> Details(int? id)
+
+
+
+        // GET: Workshops/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -60,6 +52,8 @@ namespace ShirlyStudio.Controllers
         // GET: Workshops/Create
         public IActionResult Create()
         {
+
+            ViewBag.Name = new SelectList(_context.Category.Include(c=> c.WorkshopCategory), "Id", "Name");
             return View();
         }
 

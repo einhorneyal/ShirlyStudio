@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ShirlyStudio.Models;
 
+
 namespace ShirlyStudio.Controllers
 {
     public class CategoriesController : Controller
@@ -17,6 +18,9 @@ namespace ShirlyStudio.Controllers
         {
             _context = context;
         }
+
+
+
 
         // GET: Categories
         public async Task<IActionResult> Index()
