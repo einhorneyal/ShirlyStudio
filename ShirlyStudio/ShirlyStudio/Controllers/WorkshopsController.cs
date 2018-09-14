@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using ShirlyStudio.Models;
 using WebApplication4.Models;
@@ -18,29 +19,37 @@ namespace ShirlyStudio.Controllers
         {
             _context = context;
         }
-
+        
         // GET: Workshops
-          public async Task<IActionResult> Index()
+      /*   public async Task<IActionResult> Index()
         {
             return View(await _context.Workshop.ToListAsync());
-         }
+         }*/
 
-       // public ActionResult Index()
-        //{
-          //  IList<WorkshopCategory> list = new List<WorkshopCategory>();
-            //for (int i = 0; i < 10; i++)
-            //{
-              //  list.Add(new WorkshopCategory { Id = i });
-            //}
+        public async Task<IActionResult> Index()
+        {
+            
+            return View(await _context.Workshop.OrderBy(n=>n.FullData).ToListAsync());
+        }
 
-            //return View(list);
-       // }
+        public async Task<IActionResult> Filter(string Name)
+        {
 
-//    }
+            var q = await (from c in _context.Workshop
+                           where c.Name.Contains(Name)
+                           orderby c.FullData
+                           select c).ToListAsync();
+       
+            if (q == null || q.Count==0)
+                   return Json(await _context.Workshop.ToListAsync());
+
+            return Json(q);
 
 
-    // GET: Workshops/Details/5
-    public async Task<IActionResult> Details(int? id)
+        }
+        
+        // GET: Workshops/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
