@@ -1,12 +1,9 @@
 ﻿@model WebApplication4.Models.Workshop
 
-
 @{
     ViewData["Title"] = "Create";
 }
-
 <h2>Create</h2>
-
 <h4>Workshop</h4>
 <hr />
 <div class="row">
@@ -38,31 +35,25 @@
                 <textarea rows="5" asp-for="Description" class="form-control"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            
+
             <div class="form-group">
+                @Html.LabelFor(model => model.Name, "קטגוריה", htmlAttributes: new { @class = "control-label col-md-2 no-pad" })
 
-                @Html.LabelFor(model => model.Name,"קטגוריה", htmlAttributes: new { @class = "control-label col-md-2 no-pad" })
-                
-                    @Html.DropDownList("Name",null, htmlAttributes: new { @class = "form-control" })
-
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-
-                </div>
-
+                @Html.DropDownList("Name", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
 
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
-
-            </div>
-        </form>
     </div>
+    </form>
+</div>
 </div>
 
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

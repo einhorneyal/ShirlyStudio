@@ -69,7 +69,7 @@ namespace ShirlyStudio.Controllers
         // GET: Workshops/Create
         public IActionResult Create()
         {
-
+            ViewBag.Name = new SelectList(_context.Category.Include(c => c.WorkshopCategory), "Id", "Name");
             return View();
         }
 
