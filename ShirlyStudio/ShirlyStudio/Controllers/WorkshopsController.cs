@@ -69,6 +69,7 @@ namespace ShirlyStudio.Controllers
         // GET: Workshops/Create
         public IActionResult Create()
         {
+
             return View();
         }
 
