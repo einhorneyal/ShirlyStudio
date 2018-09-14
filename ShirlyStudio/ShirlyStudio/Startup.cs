@@ -45,6 +45,9 @@ namespace ShirlyStudio
 
             services.AddDbContext<ShirlyStudioContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ShirlyStudioContext")));
+
+
+         
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,4 +78,6 @@ namespace ShirlyStudio
             });
         }
     }
+
+
 }
