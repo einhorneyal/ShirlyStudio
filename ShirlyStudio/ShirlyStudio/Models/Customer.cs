@@ -8,12 +8,24 @@ namespace WebApplication4.Models
 {
     public class Customer
     {
+        [Key]
         public int Id { get; set; }
+        [Required]
+        [Display(Name = "שם מלא")]
         public String Name { get; set; }
+
+        [Display(Name = "גיל")]
         public int Age { get; set; }
+
+        [Required]
+        [Display(Name = "כתובת אימייל")]
+        [DataType(DataType.EmailAddress)]
         public String Email { get; set; }
 
-        [Display(Name = "Phone number")]
+        [Required(ErrorMessage = "מספר הטלפון אינו חוקי")]
+        [Display(Name = "פלאפון")]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "מספר הטלפון אינו חוקי")]
         public String PhoneNumber { get; set; }
 
 

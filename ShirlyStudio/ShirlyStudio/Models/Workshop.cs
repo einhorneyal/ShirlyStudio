@@ -10,6 +10,7 @@ namespace WebApplication4.Models
  
     public class Workshop
     {
+        [Key]
         public int Id { get; set; }
 
         [Required]
@@ -41,6 +42,7 @@ namespace WebApplication4.Models
         [Display(Name = "משך הסדנא")]
         public double Duration { get; set; }
 
+        [Display(Name = "מספר עסקה")]
         public Transaction TransactionId { get; set; }
     }
 }
