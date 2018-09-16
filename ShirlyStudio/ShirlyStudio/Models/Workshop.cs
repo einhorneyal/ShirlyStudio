@@ -38,6 +38,9 @@ namespace WebApplication4.Models
         [Display(Name = "שם המורה")]
         public Teacher TeacherId { get; set; }
 
+        [Display(Name = "משך הסדנא")]
+        public double Duration { get; set; }
+
         public Transaction TransactionId { get; set; }
     }
 }

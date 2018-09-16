@@ -21,4 +21,10 @@
     <Folder Include="wwwroot\lib\jquery\NewFolder\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\Shared\new.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>
