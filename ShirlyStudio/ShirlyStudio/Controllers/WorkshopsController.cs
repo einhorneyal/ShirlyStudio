@@ -69,7 +69,7 @@ namespace ShirlyStudio.Controllers
         // GET: Workshops/Create
         public IActionResult Create()
         {
-            ViewBag.Name = new SelectList(_context.Category.Include(c => c.WorkshopCategory), "Id", "Name");
+            ViewBag.WorkshopCategory = new SelectList(_context.Category.Include(c => c.WorkshopCategory), "Id", "Name");
             return View();
         }
 
@@ -78,7 +78,7 @@ namespace ShirlyStudio.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,FullData,Price,Available_Members,Description")] Workshop workshop)
+        public async Task<IActionResult> Create([Bind("Id,Name,FullData,Price,Available_Members,Description ")] Workshop workshop)
         {
             if (ModelState.IsValid)
             {
