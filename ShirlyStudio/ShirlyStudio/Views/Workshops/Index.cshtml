@@ -21,6 +21,10 @@
                                 @*@Html.DisplayFor(modelItem => item.FullData)*@
                             </td>
                             <td>
+                                {{Duration}}
+                                @*@Html.DisplayFor(modelItem => item.Duration)*@
+                            </td>
+                            <td>
                                 {{Price}}
                                 @*@Html.DisplayFor(modelItem => item.Price)*@
                             </td>
@@ -50,7 +54,7 @@
                                             $.each(data, function (index, element) {
                                                 console.log(element);
                                                 $('tbody').append(
-                                                    `<tr><td>${element.name}</td><td>${element.fullData}</td><td>${element.price}</td><td>${element.available_Members}</td><td>${element.description}</td>`
+                                                    `<tr><td>${element.name}</td><td>${element.fullData}</td><td>${element.duration}</td><td>${element.price}</td><td>${element.available_Members}</td><td>${element.description}</td>`
                                                 )
                                             });
                                         }
@@ -88,6 +92,9 @@
                     @Html.DisplayNameFor(model => model.FullData)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.Duration)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.Price)
                 </th>
                 <th>
@@ -102,28 +109,32 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FullData)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Price)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Available_Members)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullData)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Duration)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Available_Members)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
             }
            
         </tbody>

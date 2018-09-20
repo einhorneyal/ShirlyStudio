@@ -10,6 +10,9 @@ namespace ShirlyStudio.Models
     {
         [Key]
         public int Id { get; set; }
+
+        [Required]
+        [Display(Name = "שם קטגוריה")]
         public String Name { get; set; }
         public ICollection<WorkshopCategory> WorkshopCategory { get; set; }
     }
