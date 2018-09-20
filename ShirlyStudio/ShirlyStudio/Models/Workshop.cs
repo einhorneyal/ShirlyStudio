@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using ShirlyStudio.Models;
+﻿using ShirlyStudio.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,20 +10,32 @@ namespace WebApplication4.Models
  
     public class Workshop
     {
-        [Key]
         public int Id { get; set; }
-        public String Name { get; set; }
-        public ICollection<WorkshopCategory> WorkshopCategory { get; set; }
-        public DateTime FullData { get; set; }
-        public int Price { get; set; }
- //      public String SelectedCategory { get; set; }
- //  public SelectList CategoryList { get; set; }
 
-[Display (Name= "Number of available seats")]
+        [Required]
+        [Display(Name="שם סדנא")]
+        public String Name { get; set; }
+
+        [Required]
+        [Display(Name = "קטגוריה")]
+        public ICollection<WorkshopCategory> WorkshopCategory { get; set; }
+
+        [Required]
+        [Display(Name = "תאריך הסדנא")]
+        public DateTime FullData { get; set; }
+
+        [Required]
+        [Display(Name = "מחיר הסדנא")]
+        public int Price { get; set; }
+
+        [Required]
+        [Display (Name= "מספר מקומות פנויים")]
         public int Available_Members { get; set; }
+
+        [Display(Name = "פרטים נוספים")]
         public String Description { get; set; }
 
-
+        [Display(Name = "שם המורה")]
         public Teacher TeacherId { get; set; }
 
         public Transaction TransactionId { get; set; }

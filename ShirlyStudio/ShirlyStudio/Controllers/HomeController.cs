@@ -2,6 +2,8 @@
 
 namespace ShirlyStudio.Controllers
 {
+
+
     [RequireHttps]
     public class HomeController : Controller
     {
@@ -24,4 +26,6 @@ namespace ShirlyStudio.Controllers
             return View();
         }
     }
+
+
 }

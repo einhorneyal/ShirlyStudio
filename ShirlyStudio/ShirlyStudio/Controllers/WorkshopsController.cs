@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using ShirlyStudio.Models;
 using WebApplication4.Models;
@@ -18,17 +19,35 @@ namespace ShirlyStudio.Controllers
         {
             _context = context;
         }
-
+        
         // GET: Workshops
+      /*   public async Task<IActionResult> Index()
+        {
+            return View(await _context.Workshop.ToListAsync());
+         }*/
+
         public async Task<IActionResult> Index()
         {
-          return View(await _context.Workshop.ToListAsync());
+            
+            return View(await _context.Workshop.OrderBy(n=>n.FullData).ToListAsync());
         }
 
+        public async Task<IActionResult> Filter(string Name)
+        {
+
+            var q = await (from c in _context.Workshop
+                           where c.Name.Contains(Name)
+                           orderby c.FullData
+                           select c).ToListAsync();
+       
+            if (q == null || q.Count==0)
+                   return Json(await _context.Workshop.ToListAsync());
+
+            return Json(q);
 
 
- 
-
+        }
+        
         // GET: Workshops/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -50,27 +69,9 @@ namespace ShirlyStudio.Controllers
         // GET: Workshops/Create
         public IActionResult Create()
         {
-            //Create db context object here 
-            // ShirlyStudioContext dbContext = _context;
-            //Get the value from database and then set it to ViewBag to pass it View
-            //Change here to select the value from Book table instead of departments
-            //Here you can use your linq code
-          //  var Categories = from C in _context.Category
-            //                 select C.Name;
-
-
-
-
             ViewBag.Name = new SelectList(_context.Category.Include(c => c.WorkshopCategory), "Id", "Name");
-
             return View();
-         
-
-                //Assign the value to ViewBag
-                //  ViewBag.DropdownValues = items;
-                //  return View(ViewBag);
-            }
-        
+        }
 
         // POST: Workshops/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

@@ -10,14 +10,16 @@ namespace ShirlyStudio.Models
 {
     public class ShirlyStudioContext : DbContext
     {
-        public ShirlyStudioContext()
-        {
-        }
+
+        private ShirlyStudioContext dbContext;
+
+
 
         public ShirlyStudioContext (DbContextOptions<ShirlyStudioContext> options)
             : base(options)
         {
         }
+
 
         public DbSet<WebApplication4.Models.Workshop> Workshop { get; set; }
 
