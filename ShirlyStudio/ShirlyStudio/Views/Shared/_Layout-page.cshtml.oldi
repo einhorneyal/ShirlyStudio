@@ -3,12 +3,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>שירלי מרכז אומנויות</title>
+    <title>@ViewData["Title"] - AspNetCoreDemo</title>
+
     <environment include="Development">
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="~/css/site.css" />
-        <link rel="stylesheet" href="~/css/contactus.css" />
-
 
         <!-- Plugin CSS -->
         <link href="~/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
@@ -32,27 +31,23 @@
 <body id="page-top">
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="#page-top"></a>
-
-            <img id="comp-jevs7kmlimgimage" alt="" data-type="image" src="~/img/logo.png" style="width: 180px; height: 120px; object-fit: cover; float:right;">
-
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">Start Bootstrap</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
-                <!---mr-auto change the navbar section to right-->
-                <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#about">אודות</a>
+                        <a class="nav-link js-scroll-trigger" href="#about">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#services">רשימת סדנאות</a>
+                        <a class="nav-link js-scroll-trigger" href="#services">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#portfolio">תמונות</a>
+                        <a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#contact">צור קשר</a>
+                        <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -60,6 +55,7 @@
     </nav>
     
     @RenderBody()
+    
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>

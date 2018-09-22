@@ -15,19 +15,23 @@ body {
 }
 
 hr {
-  max-width: 50px;
-  border-width: 3px;
-  border-color: #F05F40;
+    max-width: 150px;
+    border-width: 3px;
+    border-color: #dd0a50;
 }
 
-hr.light {
-  border-color: #fff;
-}
+    hr.light {
+        border-color: #dd0a50;
+    }
 
+
+#line-white {
+    border-color: white;
+}
 a {
-  color: #F05F40;
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
+    color: #F05F40;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
 }
 
 a:hover {
@@ -44,7 +48,7 @@ h6 {
 }
 
 .bg-primary {
-  background-color: #F05F40 !important;
+    background-color: #dd0a50 !important;
 }
 
 .bg-dark {
@@ -109,13 +113,15 @@ img::-moz-selection {
   color: #f05f40;
 }
 
-#mainNav .navbar-nav > li.nav-item > a.nav-link,
-#mainNav .navbar-nav > li.nav-item > a.nav-link:focus {
-  font-size: .9rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: #212529;
-}
+    #mainNav .navbar-nav > li.nav-item > a.nav-link,
+    #mainNav .navbar-nav > li.nav-item > a.nav-link:focus {
+        font-size: 20px;
+        font-family: Arial;
+        font-weight: bold;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #212529;
+    }
 
 #mainNav .navbar-nav > li.nav-item > a.nav-link:hover,
 #mainNav .navbar-nav > li.nav-item > a.nav-link:focus:hover {
@@ -136,7 +142,9 @@ img::-moz-selection {
 @media (min-width: 992px) {
   #mainNav {
     border-color: transparent;
-    background-color: transparent;
+
+    /* Navbar color*/
+    background-color: #fff;
   }
   #mainNav .navbar-brand {
     color: rgba(255, 255, 255, 0.7);
@@ -147,13 +155,13 @@ img::-moz-selection {
   #mainNav .navbar-nav > li.nav-item > a.nav-link {
     padding: 0.5rem 1rem;
   }
-  #mainNav .navbar-nav > li.nav-item > a.nav-link,
-  #mainNav .navbar-nav > li.nav-item > a.nav-link:focus {
-    color: rgba(255, 255, 255, 0.7);
-  }
+    #mainNav .navbar-nav > li.nav-item > a.nav-link,
+    #mainNav .navbar-nav > li.nav-item > a.nav-link:focus {
+        color: #dd0a50;
+    }
   #mainNav .navbar-nav > li.nav-item > a.nav-link:hover,
   #mainNav .navbar-nav > li.nav-item > a.nav-link:focus:hover {
-    color: #fff;
+    color: black;
   }
   #mainNav.navbar-shrink {
     border-bottom: 1px solid rgba(33, 37, 41, 0.1);
@@ -165,14 +173,14 @@ img::-moz-selection {
   #mainNav.navbar-shrink .navbar-brand:focus, #mainNav.navbar-shrink .navbar-brand:hover {
     color: #f05f40;
   }
-  #mainNav.navbar-shrink .navbar-nav > li.nav-item > a.nav-link,
-  #mainNav.navbar-shrink .navbar-nav > li.nav-item > a.nav-link:focus {
-    color: #212529;
-  }
-  #mainNav.navbar-shrink .navbar-nav > li.nav-item > a.nav-link:hover,
-  #mainNav.navbar-shrink .navbar-nav > li.nav-item > a.nav-link:focus:hover {
-    color: #F05F40;
-  }
+    #mainNav.navbar-shrink .navbar-nav > li.nav-item > a.nav-link,
+    #mainNav.navbar-shrink .navbar-nav > li.nav-item > a.nav-link:focus {
+        color: #dd0a50;
+    }
+    #mainNav.navbar-shrink .navbar-nav > li.nav-item > a.nav-link:hover,
+    #mainNav.navbar-shrink .navbar-nav > li.nav-item > a.nav-link:focus:hover {
+        color: black;
+    }
 }
 
 header.masthead {
@@ -304,13 +312,13 @@ header.masthead p {
 }
 
 .btn-primary {
-  background-color: #F05F40;
-  border-color: #F05F40;
+    background-color: #dd0a50;
+    border-color: #F05F40;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
   color: #fff;
-  background-color: #ee4b28 !important;
+  background-color: black !important;
 }
 
 .btn-primary:active, .btn-primary:focus {

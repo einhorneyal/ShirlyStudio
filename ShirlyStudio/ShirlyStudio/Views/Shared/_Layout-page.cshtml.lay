@@ -1,14 +1,8 @@
-﻿@{
+﻿@inject AspNetCoreDemo.Services.CountriesService Countries
+
+@{
     ViewData["Title"] = "Home Page";
 }
-
-<link href='~/css/fullcalendar.css' rel='stylesheet' />
-<link href='~/css/fullcalendar.print.css' rel='stylesheet' media='print' />
-<script src='~/js/jquery.min.js'></script>
-<script src='~/js/jquery-ui.min.js'></script>
-<script src='~/js/moment.min.js'></script>
-<script src='~/js/fullcalendar.js'></script>
-<script>jq223 = jQuery.noConflict(false)</script>
 
 <header class="masthead text-center text-white d-flex">
     <div class="container my-auto">
@@ -42,129 +36,43 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Mother fucker</h2>
+                <h2 class="section-heading">At Your Service</h2>
                 <hr class="my-4">
             </div>
         </div>
     </div>
-    <script>
-        function formatDate(date) {
-            var d = new Date(date),
-                month = '' + (d.getMonth() + 1),
-                day = '' + d.getDate(),
-                year = d.getFullYear();
-
-            if (month.length < 2) month = '0' + month;
-            if (day.length < 2) day = '0' + day;
-
-            return [year, month, day].join('-');
-        }
-
-        jq223(document).ready(function () {
-            var today = new Date();
-            var dd = today.getDate();
-            var mm = today.getMonth() + 1; //January is 0!
-            var yyyy = today.getFullYear();
-
-            if (dd < 10) {
-                dd = '0' + dd
-            }
-
-            if (mm < 10) {
-                mm = '0' + mm
-            }
-
-            today = yyyy + '-' + mm + '-' + dd;
-
-            jq223('#calendar').fullCalendar({
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'month,basicWeek,basicDay'
-                },
-                defaultDate: today,
-                navLinks: true, // can click day/week names to navigate views
-                editable: true,
-                eventLimit: true, // allow "more" link when too many events
-                events: [
-                    {
-                        title: 'All Day Event',
-                        start: '2018-03-01'
-                    },
-                    {
-                        title: 'Long Event',
-                        start: '2018-03-07',
-                        end: '2018-03-10'
-                    },
-                    {
-                        id: 999,
-                        title: 'Repeating Event',
-                        start: '2018-03-09T16:00:00'
-                    },
-                    {
-                        id: 999,
-                        title: 'Repeating Event',
-                        start: '2018-09-16T16:00:00'
-                    },
-                    {
-                        title: 'Conference',
-                        start: '2018-03-11',
-                        end: '2018-03-13'
-                    },
-                    {
-                        title: 'Meeting',
-                        start: '2018-03-12T10:30:00',
-                        end: '2018-03-12T12:30:00'
-                    },
-                    {
-                        title: 'Lunch',
-                        start: '2018-03-12T12:00:00'
-                    },
-                    {
-                        title: 'Meeting',
-                        start: '2018-03-12T14:30:00'
-                    },
-                    {
-                        title: 'Happy Hour',
-                        start: '2018-03-12T17:30:00'
-                    },
-                    {
-                        title: 'Dinner',
-                        start: '2018-03-12T20:00:00'
-                    },
-                    {
-                        title: 'Birthday Party',
-                        start: '2018-03-13T07:00:00'
-                    },
-                    {
-                        title: 'Click for Google',
-                        url: 'http://google.com/',
-                        start: '2018-09-28'
-                    }
-                ]
-            });
-
-        });
-
-    </script>
-    <style>
-
-
-        body {
-            margin: 40px 10px;
-            padding: 0;
-            font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-            font-size: 14px;
-        }
-
-        #calendar {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-    </style>
-    <body>
-        <div id='calendar'></div>
-    </body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box mt-5 mx-auto">
+                    <i class="fa fa-4x fa-diamond text-primary mb-3 sr-icons"></i>
+                    <h3 class="mb-3">Sturdy Templates</h3>
+                    <p class="text-muted mb-0">Our templates are updated regularly so they don't break.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box mt-5 mx-auto">
+                    <i class="fa fa-4x fa-paper-plane text-primary mb-3 sr-icons"></i>
+                    <h3 class="mb-3">Ready to Ship</h3>
+                    <p class="text-muted mb-0">You can use this theme as is, or you can make changes!</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box mt-5 mx-auto">
+                    <i class="fa fa-4x fa-newspaper-o text-primary mb-3 sr-icons"></i>
+                    <h3 class="mb-3">Up to Date</h3>
+                    <p class="text-muted mb-0">We update dependencies to keep things fresh.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box mt-5 mx-auto">
+                    <i class="fa fa-4x fa-heart text-primary mb-3 sr-icons"></i>
+                    <h3 class="mb-3">Made with Love</h3>
+                    <p class="text-muted mb-0">You have to make your websites with love these days!</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 <section class="p-0" id="portfolio">
     <div class="container-fluid p-0">

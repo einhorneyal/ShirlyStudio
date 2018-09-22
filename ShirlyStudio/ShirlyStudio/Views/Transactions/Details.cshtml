@@ -4,13 +4,16 @@
     ViewData["Title"] = "Details";
 }
 
+@{
+    Layout = "~/Views/Shared/_Layout-page.cshtml";
+}
+
 <h2>Details</h2>
 
 <div>
     <h4>Transaction</h4>
     <hr />
-    <dl class="dl-horizontal">
-    </dl>
+    <dl class="dl-horizontal"></dl>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
