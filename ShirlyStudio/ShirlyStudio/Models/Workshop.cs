@@ -14,7 +14,7 @@ namespace WebApplication4.Models
         public int Id { get; set; }
 
         [Required]
-        [Display(Name="שם סדנא")]
+        [Display(Name="שם סדנה")]
         public String Name { get; set; }
 
         [Required]
@@ -22,11 +22,11 @@ namespace WebApplication4.Models
         public ICollection<WorkshopCategory> WorkshopCategory { get; set; }
 
         [Required]
-        [Display(Name = "תאריך הסדנא")]
+        [Display(Name = "תאריך הסדנה")]
         public DateTime FullData { get; set; }
 
         [Required]
-        [Display(Name = "מחיר הסדנא")]
+        [Display(Name = "מחיר הסדנה")]
         public int Price { get; set; }
 
         [Required]
@@ -39,7 +39,7 @@ namespace WebApplication4.Models
         [Display(Name = "שם המורה")]
         public Teacher TeacherId { get; set; }
 
-        [Display(Name = "משך הסדנא")]
+        [Display(Name = "משך הסדנה")]
         public double Duration { get; set; }
 
         [Display(Name = "מספר עסקה")]
