@@ -34,12 +34,12 @@
         <div class="container">
             <a class="navbar-brand js-scroll-trigger" href="#page-top"></a>
 
-            <img id="comp-jevs7kmlimgimage" alt="" data-type="image" src="~/img/logo.png" style="width: 180px; height: 120px; object-fit: cover; float:right;">
+            <img data-type="image" src="~/img/logo.png" id="logo-home">
 
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <div class="collapse navbar-collapse text-lg-right" id="navbarResponsive">
                 <!---mr-auto change the navbar section to right-->
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
@@ -58,12 +58,12 @@
             </div>
         </div>
     </nav>
-    
+
     @RenderBody()
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        
+
         <!-- Plugin JavaScript -->
         <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
         <script src="~/vendor/scrollreveal/scrollreveal.min.js"></script>
@@ -85,7 +85,7 @@
                 crossorigin="anonymous"
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
         </script>
-        
+
         <!-- Plugin JavaScript -->
         <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
         <script src="~/vendor/scrollreveal/scrollreveal.min.js"></script>
@@ -96,5 +96,13 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer id="copyright">
+            <p>&copy; 2018 - שירלי מרכז אומנויות</p>
+        </footer>
+    </div>
 </body>
 </html>

@@ -1,21 +1,20 @@
 ﻿@model WebApplication4.Models.Transaction
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "פרטי עיסקה";
 }
 
 @{
     Layout = "~/Views/Shared/_Layout-page.cshtml";
 }
 
-<h2>Details</h2>
+<h2>פרטי עיסקה</h2>
 
 <div>
-    <h4>Transaction</h4>
     <hr />
     <dl class="dl-horizontal"></dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id">עריכה</a> |
+    <a asp-action="Index">בחזרה לרשימה</a>
 </div>

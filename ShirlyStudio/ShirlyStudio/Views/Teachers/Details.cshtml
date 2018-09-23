@@ -1,16 +1,15 @@
 ﻿@model WebApplication4.Models.Teacher
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "פרטי מורה";
 }
 @{
     Layout = "~/Views/Shared/_Layout-page.cshtml";
 }
 
-<h2>Details</h2>
+<h2>פרטי מורה</h2>
 
 <div>
-    <h4>Teacher</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -22,6 +21,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id">עריכה</a> |
+    <a asp-action="Index">בחזרה לרשימה</a>
 </div>

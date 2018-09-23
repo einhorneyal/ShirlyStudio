@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<WebApplication4.Models.Transaction>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "רשימת עיסקאות";
 }
 
 @{
@@ -9,10 +9,10 @@
 }
 
 
-<h2>Index</h2>
+<h2>רשימת עיסקאות</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">יצירת עיסקה חדשה</a>
 </p>
 <table class="table">
     <thead>
@@ -25,9 +25,9 @@
         {
             <tr>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">עריכת עיסקה</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">פרטי עיסקה</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">מחיקת עיסקה</a>
                 </td>
             </tr>
         }

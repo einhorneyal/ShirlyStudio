@@ -1,7 +1,7 @@
 ﻿@model WebApplication4.Models.Workshop
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "עריכת סדנה";
 }
 
 @{
@@ -9,9 +9,8 @@
 }
 
 
-<h2>Edit</h2>
+<h2>עריכת סדנה</h2>
 
-<h4>Workshop</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -50,14 +49,14 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="שמירה" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">בחזרה לרשימה</a>
 </div>
 
 @section Scripts {

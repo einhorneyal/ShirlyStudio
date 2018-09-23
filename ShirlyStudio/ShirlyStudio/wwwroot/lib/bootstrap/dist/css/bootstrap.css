@@ -1222,8 +1222,10 @@ h2,
 .h2,
 h3,
 .h3 {
-  margin-top: 20px;
-  margin-bottom: 10px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #dd0a50;
 }
 h1 small,
 .h1 small,
@@ -1247,6 +1249,7 @@ h6,
 .h6 {
   margin-top: 10px;
   margin-bottom: 10px;
+  text-align:center;
 }
 h4 small,
 .h4 small,
@@ -1288,6 +1291,7 @@ h6,
 }
 p {
   margin: 0 0 10px;
+  text-align:center;
 }
 .lead {
   margin-bottom: 20px;
