@@ -34,20 +34,15 @@ namespace ShirlyStudio.Controllers
 
         public async Task<IActionResult> Filter(string Name)
         {
-
+            if (Name == null) return Json(await _context.Workshop.OrderBy(n => n.FullData).ToListAsync());
             var q = await (from c in _context.Workshop
                            where c.Name.Contains(Name)
                            orderby c.FullData
                            select c).ToListAsync();
-       
-            if (q == null || q.Count==0)
-                   return Json(await _context.Workshop.ToListAsync());
 
             return Json(q);
-
-
         }
-        
+
         // GET: Workshops/Details/5
         public async Task<IActionResult> Details(int? id)
         {
