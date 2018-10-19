@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using ShirlyStudio.Models;
 using WebApplication4.Models;
+using System.Web.Optimization;
 
 namespace ShirlyStudio.Controllers
 {
@@ -19,29 +20,51 @@ namespace ShirlyStudio.Controllers
         {
             _context = context;
         }
-        
-        // GET: Workshops
-      /*   public async Task<IActionResult> Index()
-        {
-            return View(await _context.Workshop.ToListAsync());
-         }*/
 
+        [HttpGet]
+        public JsonResult GetRecordsMonthly()
+        {
+            return Json(_context.Workshop.OrderBy(n => n.FullData).ToList());
+        }
+        [HttpGet]
+        public JsonResult Getfreeplace()
+        {
+            return Json(_context.Workshop.OrderBy(n => n.FullData).ToList());
+        }
         public async Task<IActionResult> Index()
         {
-            
-            return View(await _context.Workshop.OrderBy(n=>n.FullData).ToListAsync());
+
+            return View(await _context.Workshop.OrderBy(n => n.FullData).ToListAsync());
         }
 
+        // להוסיף עוד 2 משתנים בקלט
         public async Task<IActionResult> Filter(string Name)
         {
+
+            // אותה שאילתה לשלושתם רק נדרש להגדיר את המשתנים
             if (Name == null) return Json(await _context.Workshop.OrderBy(n => n.FullData).ToListAsync());
             var q = await (from c in _context.Workshop
-                           where c.Name.Contains(Name)
+                               //לתקן את התנאים - בגללם כל התוצאות יוצאות
+                           where (c.Name.Contains(Name))
                            orderby c.FullData
                            select c).ToListAsync();
 
             return Json(q);
         }
+
+        /*  public async Task<IActionResult> Filter(string Name, int price, int available_place)
+          {
+
+              // אותה שאילתה לשלושתם רק נדרש להגדיר את המשתנים
+              if (Name == null) return Json(await _context.Workshop.OrderBy(n => n.FullData).ToListAsync());
+              var q = await (from c in _context.Workshop
+                                 //לתקן את התנאים - בגללם כל התוצאות יוצאות
+                             where (c.Name.Contains(Name) || c.Price >= price || c.Available_Members >= available_place)
+                             orderby c.FullData
+                             select c).ToListAsync();
+
+              return Json(q);
+          }*/
 
         // GET: Workshops/Details/5
         public async Task<IActionResult> Details(int? id)

@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<WebApplication4.Models.Workshop>
 
-
 @{ ViewData["Title"] = "רשימת סדנאות";
 }
 
@@ -8,12 +7,19 @@
     Layout = "~/Views/Shared/_Layout-page.cshtml";
 }
 
+<script src="~/js/jquery-3.3.1.js"></script>
+
 <body>
+
+
+
     <div>
 
+
         @section Scripts{
-            <script src="~/js/jquery-3.3.1.js"></script>
             <script id="row" type="template">
+
+
                 <tr>
                     <td>
                         {{Name}}
@@ -43,11 +49,14 @@
             </script>
             <script>
                 $(function () {
+
+                    // לשנות את המשתנה שנכנס לפי id , price...
                     $('input').keyup(function () {
                         $.ajax(
                             {
                                 type: "Get",
                                 dataType: "json",
+
                                 url: "/Workshops/Filter/?name=" + $(this).val(),
                                 success: function (data) {
                                     $('tbody tr').remove();
@@ -73,14 +82,12 @@
 
             </script>
         }
-
     </div>
+
+
 </body>
 
-
-
 <h2>רשימת סדנאות</h2>
-
 
 <p>
     <a asp-action="Create">יצירת סדנה חדשה</a>
@@ -121,7 +128,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.FullData)
                 </td>
-
                 <td>
                     @Html.DisplayFor(modelItem => item.Duration)
                 </td>
@@ -141,7 +147,84 @@
                 </td>
             </tr>
         }
-
     </tbody>
-
 </table>
+<h1>סדנאות לפי מחירים</h1>
+<canvas id="myChart"></canvas>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+
+@* for graphs*@
+<div>
+    <script>
+
+        $.ajax(
+            {
+                type: "Get",
+                dataType: "json",
+                url: "/Workshops/GetRecordsMonthly",
+                success: function (data) {
+                    console.log(data);
+                    var ctx = document.getElementById('myChart').getContext('2d');
+                    var chart = new Chart(ctx, {
+                        // The type of chart we want to create
+                        type: 'line',
+
+                        // The data for our dataset
+                        data: {
+                            labels: [data[0].name, data[1].name],
+                            datasets: [{
+                                label: "סדנאות לפי מחירים",
+                                backgroundColor: 'rgb(255, 99, 132)',
+                                borderColor: 'rgb(255, 99, 132)',
+                                data: [data[0].price, data[1].price]
+                            }]
+                        }
+
+                        // Configuration options go here
+                        //options: {}
+                    });
+                }
+            }
+        );
+
+    </script>
+</div>
+<h1>סדנאות לפי מקומות פנויים</h1>
+
+<div>
+    <canvas id="myChart2"></canvas>
+    <script>
+        $.ajax(
+            {
+                type: "Get",
+                dataType: "json",
+                url: "/Workshops/Getfreeplace",
+                success: function (data) {
+                    console.log(data);
+                    var ctx = document.getElementById('myChart2').getContext('2d');
+                    var chart = new Chart(ctx, {
+                        // The type of chart we want to create
+                        type: 'line',
+
+                        // The data for our dataset
+                        data: {
+                            labels: [data[0].name, data[1].name],
+                            datasets: [{
+                                label: "סדנאות לפי מקומות פנויים",
+                                backgroundColor: 'rgb(152, 99, 132)',
+                                borderColor: 'rgb(152, 99, 132)',
+                                data: [data[0].available_Members, data[1].available_Members]
+                            }]
+                        }
+
+                        // Configuration options go here
+                        //options: {}
+                    });
+                }
+            }
+        );
+
+
+    </script>
+</div>
