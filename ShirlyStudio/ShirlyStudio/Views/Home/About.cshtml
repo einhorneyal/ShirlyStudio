@@ -1,9 +1,16 @@
-﻿@{
+﻿@model IEnumerable<WebApplication4.Models.Workshop>
+
+@{
     ViewData["Title"] = "צור איתנו קשר בפייסבוק";
 }
 <h2>@ViewData["Title"]</h2>
 @*<h3>@ViewData["Message"]</h3>*@
 <link rel="stylesheet" href="~/css/FacebookDesign.css" />
+
+@{
+    Layout = "~/Views/Shared/_Layout-page.cshtml";
+}
+
 
 <p>עמוד הבית של שירלי </p>
 
@@ -14,11 +21,14 @@
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
             js = d.createElement(s); js.id = id;
-            js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1';
+            js.src = 'https://connect.facebook.net/he_IL/sdk.js#xfbml=1&version=v3.1';
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
 
-    <div class="fb-page" data-href="https://www.facebook.com/StudioShirly/?timeline_context_item_type=intro_card_work&amp;timeline_context_item_source=100001378687979&amp;fref=tag" data-tabs="timeline" data-width="500" data-height="5000" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/StudioShirly/?timeline_context_item_type=intro_card_work&amp;timeline_context_item_source=100001378687979&amp;fref=tag" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/StudioShirly/?timeline_context_item_type=intro_card_work&amp;timeline_context_item_source=100001378687979&amp;fref=tag">‎שירלי מרכז אומנויות‎</a></blockquote></div>
+
+    <div class="fb-page" data-href="https://www.facebook.com/StudioShirly/" data-tabs="timeline" data-width="500" data-height="800" data-small-header="false" data-adapt-container-width="false" data-hide-cover="false" data-show-facepile="false"><blockquote cite="https://www.facebook.com/StudioShirly/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/StudioShirly/">‏שירלי מרכז אומנויות‏</a></blockquote></div>
 </body>
+
+
 
 
