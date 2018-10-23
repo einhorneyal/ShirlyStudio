@@ -38,33 +38,98 @@ namespace ShirlyStudio.Controllers
         }
 
         // להוסיף עוד 2 משתנים בקלט
-        public async Task<IActionResult> Filter(string Name)
+
+
+        public async Task<IActionResult> Filter(string Name, int price, int available_members)
         {
 
             // אותה שאילתה לשלושתם רק נדרש להגדיר את המשתנים
-            if (Name == null) return Json(await _context.Workshop.OrderBy(n => n.FullData).ToListAsync());
-            var q = await (from c in _context.Workshop
-                               //לתקן את התנאים - בגללם כל התוצאות יוצאות
-                           where (c.Name.Contains(Name))
-                           orderby c.FullData
-                           select c).ToListAsync();
+            if (Name == null && price == 0 && available_members == 0) return Json(await _context.Workshop.OrderBy(n => n.FullData).ToListAsync());
+            //  if (Name == null) Name = "";
+            if (available_members == 0 && price == 0 && Name != null)
+            {
 
-            return Json(q);
+                var m = await (from c in _context.Workshop
+                                   //לתקן את התנאים - בגללם כל התוצאות יוצאות
+                               where (c.Name.Contains(Name))
+                               orderby c.FullData
+                               select c).ToListAsync();
+                return Json(m);
+            }
+            else if (available_members == 0 && price != 0 && Name == null)
+            {
+                var q = await (from c in _context.Workshop
+                                   //לתקן את התנאים - בגללם כל התוצאות יוצאות
+                               where (c.Price <= price)
+                               orderby c.FullData
+                               select c).ToListAsync();
+                return Json(q);
+
+            }
+            else if (available_members == 0 && price != 0 && Name != null)
+            {
+                var q = await (from c in _context.Workshop
+                                   //לתקן את התנאים - בגללם כל התוצאות יוצאות
+                               where (c.Price <= price)
+                               where (c.Name.Contains(Name))
+
+                               orderby c.FullData
+                               select c).ToListAsync();
+                return Json(q);
+
+            }
+            else if (available_members != 0 && price == 0 && Name != null)
+            {
+                var q = await (from c in _context.Workshop
+                                   //לתקן את התנאים - בגללם כל התוצאות יוצאות
+                               where (c.Available_Members >= available_members)
+                               where (c.Name.Contains(Name))
+
+                               orderby c.FullData
+                               select c).ToListAsync();
+                return Json(q);
+            }
+            else if (available_members != 0 && price != 0 && Name == null)
+            {
+                var q = await (from c in _context.Workshop
+                                   //לתקן את התנאים - בגללם כל התוצאות יוצאות
+                               where (c.Available_Members >= available_members)
+                               where (c.Price <= price)
+
+                               orderby c.FullData
+                               select c).ToListAsync();
+                return Json(q);
+
+            }
+
+            else if (available_members != 0 && price == 0 && Name == null)
+            {
+                var q = await (from c in _context.Workshop
+                                   //לתקן את התנאים - בגללם כל התוצאות יוצאות
+                               where (c.Available_Members >= available_members)
+
+                               orderby c.FullData
+                               select c).ToListAsync();
+                return Json(q);
+            }
+            else
+            {
+                var q = await (from c in _context.Workshop
+                                   //לתקן את התנאים - בגללם כל התוצאות יוצאות
+                               where (c.Available_Members >= available_members)
+                               where (c.Price <= price)
+                               where (c.Name.Contains(Name))
+                               orderby c.FullData
+                               select c).ToListAsync();
+                return Json(q);
+
+            }
+
+
         }
 
-        /*  public async Task<IActionResult> Filter(string Name, int price, int available_place)
-          {
 
-              // אותה שאילתה לשלושתם רק נדרש להגדיר את המשתנים
-              if (Name == null) return Json(await _context.Workshop.OrderBy(n => n.FullData).ToListAsync());
-              var q = await (from c in _context.Workshop
-                                 //לתקן את התנאים - בגללם כל התוצאות יוצאות
-                             where (c.Name.Contains(Name) || c.Price >= price || c.Available_Members >= available_place)
-                             orderby c.FullData
-                             select c).ToListAsync();
 
-              return Json(q);
-          }*/
 
         // GET: Workshops/Details/5
         public async Task<IActionResult> Details(int? id)
