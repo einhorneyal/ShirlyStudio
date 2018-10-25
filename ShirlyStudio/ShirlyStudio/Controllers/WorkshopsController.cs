@@ -130,7 +130,6 @@ namespace ShirlyStudio.Controllers
 
 
 
-
         // GET: Workshops/Details/5
         public async Task<IActionResult> Details(int? id)
         {

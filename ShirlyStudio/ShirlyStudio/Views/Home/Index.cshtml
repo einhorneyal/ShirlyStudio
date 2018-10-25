@@ -3,7 +3,6 @@
 }
 <!--Google Font for navbar-->
 <link href="https://fonts.googleapis.com/css?family=Secular+One&amp;subset=hebrew" rel="stylesheet">
-<link href="~/Views/Home/Index.css" rel="stylesheet" />
 
 <link href='~/css/fullcalendar.css' rel='stylesheet' />
 <link href='~/css/fullcalendar.print.css' rel='stylesheet' media='print' />
@@ -12,6 +11,8 @@
 <script src='~/js/moment.min.js'></script>
 <script src='~/js/fullcalendar.js'></script>
 <script>jq223 = jQuery.noConflict(false)</script>
+<script src="~/js/jquery-3.3.1.js"></script>
+
 
 <header class="masthead text-center text-white d-flex">
     <div class="container my-auto">
@@ -42,17 +43,60 @@
         </div>
     </div>
 </section>
+
 <section id="services">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2 class="section-heading">רשימת סדנאות</h2>
+
+                @* This is a web service weather *@
+                <div id="showWeatherForcast"></div>
+                <script type="text/javascript">
+
+
+                    $(document).ready(function () {
+
+
+                        var city = 'rishon lezion';
+                        var key = 'f5a9dcc0f6833e86ac420e23ee102d20';
+                        $.ajax({
+                            url: 'http://api.openweathermap.org/data/2.5/weather',
+                            dataType: 'json',
+                            type: 'GET',
+                            data: { q: city, appid: key, units: 'metric' },
+
+                            success: function (data) {
+                                var wf = '';
+                                $.each(data.weather, function (index, val) {
+                                    wf += '<p><b>' + data.name + "</b><img src= http://openweathermap.org/img/w/" + val.icon + ".png></p>" +
+                                        data.main.temp + '&deg;C ' + ' | ' + val.main + ',' + val.description
+                                    if (val.description == "moderate rain" || val.description == "shower rain" || val.description == "rain" || val.description == "thunderstorm" || val.description == "snow" || val.description == "mist" || val.description == "thunderstorm with rain") {
+                                        wf += '  - Due to an extreame weather no class for today :( ';
+
+                                    }
+                                    else { wf += '  - A wondarful weather for art ! :)' }
+                                });
+                                $("#showWeatherForcast").html(wf);
+                            }
+
+
+                        })
+
+
+                    }
+                    )
+
+
+                </script>
+
+
                 <hr class="my-4">
             </div>
         </div>
     </div>
     <script>
-    function formatDate(date) {
+        function formatDate(date) {
             var d = new Date(date),
                 month = '' + (d.getMonth() + 1),
                 day = '' + d.getDate(),
@@ -169,8 +213,101 @@
         <div id='calendar'></div>
     </body>
 </section>
-<section>
-    <center><iframe width="1000" height="500" src="https://www.youtube.com/embed/ESG7XlAyyDU?start=7" frameborder="0" allow="autoplay; encrypted-media" id="video" allowfullscreen></iframe></center>
+<section class="p-0" id="portfolio">
+    <div class="container-fluid p-0">
+        <div class="row no-gutters popup-gallery">
+            <div class="col-lg-4 col-sm-6">
+                <a class="portfolio-box" href="img/portfolio/fullsize/1.jpg">
+                    <img class="img-fluid" src="img/portfolio/thumbnails/1.jpg" alt="">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                Category
+                            </div>
+                            <div class="project-name">
+                                Project Name
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <a class="portfolio-box" href="img/portfolio/fullsize/2.jpg">
+                    <img class="img-fluid" src="img/portfolio/thumbnails/2.jpg" alt="">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                Category
+                            </div>
+                            <div class="project-name">
+                                Project Name
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <a class="portfolio-box" href="img/portfolio/fullsize/3.jpg">
+                    <img class="img-fluid" src="img/portfolio/thumbnails/3.jpg" alt="">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                Category
+                            </div>
+                            <div class="project-name">
+                                Project Name
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <a class="portfolio-box" href="img/portfolio/fullsize/4.jpg">
+                    <img class="img-fluid" src="img/portfolio/thumbnails/4.jpg" alt="">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                Category
+                            </div>
+                            <div class="project-name">
+                                Project Name
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <a class="portfolio-box" href="img/portfolio/fullsize/5.jpg">
+                    <img class="img-fluid" src="img/portfolio/thumbnails/5.jpg" alt="">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                Category
+                            </div>
+                            <div class="project-name">
+                                Project Name
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <a class="portfolio-box" href="img/portfolio/fullsize/6.jpg">
+                    <img class="img-fluid" src="img/portfolio/thumbnails/6.jpg" alt="">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                Category
+                            </div>
+                            <div class="project-name">
+                                Project Name
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
 </section>
 <section id="contact">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -189,7 +326,7 @@
                     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
                     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyD823nr5pZro96G_KOEBem3d1g3ORSQZ60&callback=initMap" async defer></script>
                     <script>
-    var infowindow = new google.maps.InfoWindow({
+                        var infowindow = new google.maps.InfoWindow({
                             content: contentString
                         });
                         function initMap() {
