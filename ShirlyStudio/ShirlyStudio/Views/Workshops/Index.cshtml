@@ -167,6 +167,14 @@
                 success: function (data) {
                     console.log(data);
                     var ctx = document.getElementById('myChart').getContext('2d');
+                    var lables = [];
+                    var price = [];
+                    for (i in data) {
+                        lables.push(data[i].name);
+                        price.push(data[i].price);
+                        
+                    }
+
                     var chart = new Chart(ctx, {
                         // The type of chart we want to create
                         type: 'line',
@@ -174,17 +182,15 @@
                         // The data for our dataset
                         data: {
 
-                            labels: [data[0].name, data[1].name, data[2].name, data[3].name, data[4].name],
+                            labels: lables,
                             datasets: [{
                                 label: "סדנאות לפי מחירים",
                                 backgroundColor: 'rgb(255, 99, 132)',
                                 borderColor: 'rgb(255, 99, 132)',
-                                data: [data[0].price, data[1].price, data[2].price, data[3].price, data[4].price],
+                                data: price,
                             }]
                         }
-
-                        // Configuration options go here
-                        //options: {}
+                        
                     });
                 }
             }
@@ -205,23 +211,31 @@
                 success: function (data) {
                     console.log(data);
                     var ctx = document.getElementById('myChart2').getContext('2d');
+                    var lables = [];
+                    var ams = [];
+                    for (i in data)
+                    {
+                        lables.push(data[i].name);
+                        ams.push(data[i].available_Members);
+                    }
+
                     var chart = new Chart(ctx, {
                         // The type of chart we want to create
                         type: 'line',
-
+                        
+                
                         // The data for our dataset
                         data: {
-                            labels: [data[0].name, data[1].name, data[2].name, data[3].name, data[4].name],
+                            labels: lables,
                             datasets: [{
                                 label: "סדנאות לפי מקומות פנויים",
                                 backgroundColor: 'rgb(152, 99, 132)',
                                 borderColor: 'rgb(152, 99, 132)',
-                                data: [data[0].available_Members, data[1].available_Members, data[2].available_Members, data[3].available_Members, data[4].available_Members],
+                                data: ams
                             }]
                         }
 
-                        // Configuration options go here
-                        //options: {}
+                        
                     });
                 }
             }
