@@ -7,80 +7,26 @@
     Layout = "~/Views/Shared/_Layout-page.cshtml";
 }
 
-<script src="~/js/jquery-3.3.1.js"></script>
 
+<link href="~/css/Index.css" rel="stylesheet" />
+<script src="https://d3js.org/d3.v3.min.js"></script>‏
+<script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<script src="~/js/jquery-3.3.1.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 <body>
 
     <div>
 
-        @section Scripts{
-            <script id="row" type="template">
-                <tr>
-                    <td>
-                        {{Name}}
-                        @*@Html.DisplayFor(modelItem => item.Name)*@
-                    </td>
-                    <td>
-                        {{FullData}}
-                        @*@Html.DisplayFor(modelItem => item.FullData)*@
-                    </td>
-                    <td>
-                        {{Duration}}
-                        @*@Html.DisplayFor(modelItem => item.Duration)*@
-                    </td>
-                    <td>
-                        {{Price}}
-                        @*@Html.DisplayFor(modelItem => item.Price)*@
-                    </td>
-                    <td>
-                        {{Available_Members}}
-                        @*@Html.DisplayFor(modelItem => item.Available_Members)*@
-                    </td>
-                    <td>
-                        {{Description}}
-                        @*@Html.DisplayFor(modelItem => item.Description)*@
-                    </td>
-                </tr>
-            </script>
-            <script>
-                $(function () {
 
-                    // לשנות את המשתנה שנכנס לפי id , price...
-                    $('#Name,#price,#available_members').keyup(function () {
-                        $.ajax(
-                            {
-                                type: "Get",
-                                dataType: "json",
-
-                                url: "/Workshops/Filter/?name=" + $(Name).val() + '&price=' + $(price).val() + '&available_members=' + $(available_members).val(),
-                                success: function (data) {
-                                    $('tbody tr').remove();
-                                    var temp = $.trim($('#row'));
-                                    console.log(data);
-                                    console.log(temp);
-                                    $.each(data, function (index, element) {
-                                        console.log(element);
-                                        $('tbody').append(
-                                            `<tr><td>${element.name}</td><td>${element.fullData}</td><td>${element.duration}</td><td>${element.price}</td><td>${element.available_Members}</td><td>${element.description}</td>`
-                                        )
-                                    });
-                                }
-                            }
-                        );
-                    }
-                    )
-                }
-
-                )
-            </script>
-        }
     </div>
 
 
     <input id="Name" type="text" name=" = " name" />
     <input type="submit" value="לפי סדנה" id="filter-button" />
-    <input id="price" type="text" name=" = " name" />
+    <input id="price" type="number" name=" = " name" />
     <input type="submit" value="עד מחיר" id="filter-button" />
+
     <input id="available_members" type="text" name=" = " name" />
     <input type="submit" value="מס' מקומות" id="filter-button" />
 </body>
@@ -118,7 +64,7 @@
     </thead>
 
 
-    <tbody>
+    <tbody id="workshop_table">
 
         @foreach (var item in Model)
         {
@@ -150,10 +96,42 @@
         }
     </tbody>
 </table>
-<h1>סדנאות לפי מחירים</h1>
-<canvas id="myChart"></canvas>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
+<h1>סדנאות לפי מחירים</h1>
+
+<div class="row">
+    <div class="col-md-5 gragh-test">
+
+    </div>
+    <div class="col-md-5 gragh-test">
+
+    </div>
+
+</div>
+
+<div id="chart"></div>
+
+<canvas id="prices_chart"></canvas>
+<h1>סדנאות לפי מקומות פנויים</h1>
+
+<div id="chart2"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script>
+    // Get the margin to width ratio as a percent
+    // using the margin object properties
+    function getRatio(side) {
+        return ((margin[side] / width) * 100) + '%'
+    }
+    // Declare Dimensions to create graph
+    // Margin is used to show x and y axes
+    // Size here is declared in pixels, although this
+    // defines the relative values, since the chart changes depending
+    // on container
+    var margin = { left: 50, top: 10, right: 50, bottom: 30 }
+    var width = 700
+    var height = 400
+
+</script>
 
 @* for graphs*@
 <div>
@@ -165,15 +143,100 @@
                 dataType: "json",
                 url: "/Workshops/GetRecordsMonthly",
                 success: function (data) {
-                    console.log(data);
-                    var ctx = document.getElementById('myChart').getContext('2d');
+                    //    console.log(data);
+                    //   var ctx = document.getElementById('prices_chart').getContext('2d');
                     var lables = [];
                     var price = [];
                     for (i in data) {
                         lables.push(data[i].name);
                         price.push(data[i].price);
-                        
+
                     }
+
+                    // Simple example dataset
+                    var letters = lables;
+                    var numbers = price;
+
+                    // marginRatio converts margin absolute values to
+                    // percent values to keep SVG responsive
+                    var marginRatio = {
+                        left: getRatio('left'),
+                        top: getRatio('top'),
+                        right: getRatio('right'),
+                        bottom: getRatio('bottom')
+                    }
+                    var barWidth = width / numbers.length
+
+                    var svg = d3.select('div#chart')
+                        // Create div to act as SVG container
+                        .append('div')
+                        .attr('id', 'svg-container')
+                        // Add SVG that will contain Graph elements
+                        .append('svg')
+                        // Add margin to show axes
+                        .style('padding', marginRatio.top + ' ' + marginRatio.right + ' ' + marginRatio.bottom + ' ' + marginRatio.left)
+                        // Preserve aspect ratio xMinYmin ensures SVG fills #svg-container
+                        .attr('preserveAspectRatio', 'xMinYMin meet')
+                        // Sets the viewbox, for more info on viewbox, combined with preveserveAspectRatio, this is what turns the bar chart
+                        // into a responsive bar chart
+                        .attr('viewBox', '0 0 ' + (width + margin.left + margin.right) + ' ' + (height + margin.top + margin.bottom))
+                        // Id to target with CSS
+                        .attr('id', 'svg-content-responsive')
+                    // Define the x scale as ordinal, ordinal means the data cannot be meassured by a
+                    // standard of difference. This is different to a linear scale that we will use later
+                    var x = d3.scale.ordinal()
+                        // Domain stands for input domain, this is the data we want to display
+                        .domain(letters)
+                        // Range stands for Output Range, this is the width the data will take up
+                        // Here it is used for the x axis. 0 is the start of our graph, width is the
+                        // end of it
+                        .rangeRoundBands([0, width], 0.1, 0.1)
+                    // Here we define the x axis using the svg.axis() method. The x scale we just
+                    // defined tells the axis what data to display and how big the intervals
+                    // between that data is on the axis. Orient bottom means it will be shown below
+                    // the bars.
+                    var xAxis = d3.svg.axis()
+                        .scale(x)
+                        .orient('bottom')
+                    // Here we repeat the process for the y axis. The difference is that we have numerical
+                    // data, so we can use scale.linear.
+                    var y = d3.scale.linear()
+                        // Instead of using the whole array for the input domain, we use 0, since we
+                        // want our y axis to start at 0, and the biggest value of our dataset
+                        // d3.max returns the largest value of an array
+                        .domain([d3.max(numbers), 0])
+                        .range([0, height])
+                    // This is defined in the same wat the x axis is defined, except the orient is now left
+                    // instead of bottom - for obvious reasons.
+                    var yAxis = d3.svg.axis()
+                        .scale(y)
+                        .orient('left')
+                    // Bind data to bar groups
+                    var bar = svg.selectAll('g')
+                        .data(numbers)
+                        .enter()
+                        .append('g')
+                        .attr('transform', function (d, i) { return 'translate(' + i * barWidth + ', 0)' })
+                    // Add x axis to svgContainer
+                    svg.append('g')
+                        .attr('class', 'x axis')
+                        .call(xAxis)
+                        .attr('transform', 'translate(0,' + height + ')')
+                    // Add y axis
+                    svg.append('g')
+                        .attr('class', 'y axis')
+                        .call(yAxis)
+                    // Add SVG rectangles that act as bars
+                    // barWidth is calculated dynamically from the width divided by data.length
+                    // The y attribute and height is based on the data, scaled to the height of
+                    // graph. Remember input domain and output range
+                    bar.append('rect')
+                        .attr('class', 'bar')
+                        .attr('width', barWidth - 1)
+                        .attr('y', function (d) { return y(d) })
+                        .attr('height', function (d) { return height - y(d) })
+
+
 
                     var chart = new Chart(ctx, {
                         // The type of chart we want to create
@@ -190,18 +253,19 @@
                                 data: price,
                             }]
                         }
-                        
+
                     });
                 }
             }
         );
 
     </script>
+
 </div>
-<h1>סדנאות לפי מקומות פנויים</h1>
 
 <div>
     <canvas id="myChart2"></canvas>
+
     <script>
         $.ajax(
             {
@@ -209,21 +273,102 @@
                 dataType: "json",
                 url: "/Workshops/Getfreeplace",
                 success: function (data) {
-                    console.log(data);
-                    var ctx = document.getElementById('myChart2').getContext('2d');
+                    //     console.log(data);
+                    //  var ctx = document.getElementById('myChart2').getContext('2d');
                     var lables = [];
                     var ams = [];
-                    for (i in data)
-                    {
+                    for (i in data) {
                         lables.push(data[i].name);
                         ams.push(data[i].available_Members);
                     }
 
+                    var letters = lables;
+                    var numbers = ams;
+
+                    // marginRatio converts margin absolute values to
+                    // percent values to keep SVG responsive
+                    var marginRatio = {
+                        left: getRatio('left'),
+                        top: getRatio('top'),
+                        right: getRatio('right'),
+                        bottom: getRatio('bottom')
+                    }
+                    var barWidth = width / numbers.length
+
+                    var svg = d3.select('div#chart2')
+                        // Create div to act as SVG container
+                        .append('div')
+                        .attr('id', 'svg-container')
+                        // Add SVG that will contain Graph elements
+                        .append('svg')
+                        // Add margin to show axes
+                        .style('padding', marginRatio.top + ' ' + marginRatio.right + ' ' + marginRatio.bottom + ' ' + marginRatio.left)
+                        // Preserve aspect ratio xMinYmin ensures SVG fills #svg-container
+                        .attr('preserveAspectRatio', 'xMinYMin meet')
+                        // Sets the viewbox, for more info on viewbox, combined with preveserveAspectRatio, this is what turns the bar chart
+                        // into a responsive bar chart
+                        .attr('viewBox', '0 0 ' + (width + margin.left + margin.right) + ' ' + (height + margin.top + margin.bottom))
+                        // Id to target with CSS
+                        .attr('id', 'svg-content-responsive')
+                    // Define the x scale as ordinal, ordinal means the data cannot be meassured by a
+                    // standard of difference. This is different to a linear scale that we will use later
+                    var x = d3.scale.ordinal()
+                        // Domain stands for input domain, this is the data we want to display
+                        .domain(letters)
+                        // Range stands for Output Range, this is the width the data will take up
+                        // Here it is used for the x axis. 0 is the start of our graph, width is the
+                        // end of it
+                        .rangeRoundBands([0, width], 0.1, 0.1)
+                    // Here we define the x axis using the svg.axis() method. The x scale we just
+                    // defined tells the axis what data to display and how big the intervals
+                    // between that data is on the axis. Orient bottom means it will be shown below
+                    // the bars.
+                    var xAxis = d3.svg.axis()
+                        .scale(x)
+                        .orient('bottom')
+                    // Here we repeat the process for the y axis. The difference is that we have numerical
+                    // data, so we can use scale.linear.
+                    var y = d3.scale.linear()
+                        // Instead of using the whole array for the input domain, we use 0, since we
+                        // want our y axis to start at 0, and the biggest value of our dataset
+                        // d3.max returns the largest value of an array
+                        .domain([d3.max(numbers), 0])
+                        .range([0, height])
+                    // This is defined in the same wat the x axis is defined, except the orient is now left
+                    // instead of bottom - for obvious reasons.
+                    var yAxis = d3.svg.axis()
+                        .scale(y)
+                        .orient('left')
+                    // Bind data to bar groups
+                    var bar = svg.selectAll('g')
+                        .data(numbers)
+                        .enter()
+                        .append('g')
+                        .attr('transform', function (d, i) { return 'translate(' + i * barWidth + ', 0)' })
+                    // Add x axis to svgContainer
+                    svg.append('g')
+                        .attr('class', 'x axis')
+                        .call(xAxis)
+                        .attr('transform', 'translate(0,' + height + ')')
+                    // Add y axis
+                    svg.append('g')
+                        .attr('class', 'y axis')
+                        .call(yAxis)
+                    // Add SVG rectangles that act as bars
+                    // barWidth is calculated dynamically from the width divided by data.length
+                    // The y attribute and height is based on the data, scaled to the height of
+                    // graph. Remember input domain and output range
+                    bar.append('rect')
+                        .attr('class', 'bar')
+                        .attr('width', barWidth - 1)
+                        .attr('y', function (d) { return y(d) })
+                        .attr('height', function (d) { return height - y(d) })
+
                     var chart = new Chart(ctx, {
                         // The type of chart we want to create
                         type: 'line',
-                        
-                
+
+
                         // The data for our dataset
                         data: {
                             labels: lables,
@@ -235,7 +380,7 @@
                             }]
                         }
 
-                        
+
                     });
                 }
             }
@@ -245,3 +390,131 @@
     </script>
 </div>
 
+<h1> Join & GroupBy</h1>
+@*= join and groupby*@
+
+<script id="row" type="template">
+    <tr>
+        <td>
+            {{Name}}
+            @*@Html.DisplayFor(modelItem => item.Name)*@
+        </td>
+        <td>
+            {{Price}}
+            @*@Html.DisplayFor(modelItem => item.Price)*@
+        </td>
+
+    </tr>
+</script>
+
+
+@* for view the join and group by*@
+<script>
+    $(function () {
+        $.ajax(
+            {
+                type: "Get",
+                dataType: "json",
+
+                url: "/Workshops/Tryjoin",
+                success: function (data) {
+                    $('#join tr').remove();
+                    var temp = $.trim($('#row'));
+                    console.log(data);
+                    console.log(temp);
+                    $.each(data, function (index, element) {
+                        console.log(element);
+                        $('#join').append(
+                            `<tr><td>${element.id}</td><td>${element.counter}</td></tr>`
+                        )
+                    });
+                }
+            }
+        );
+    }
+
+    )
+
+</script>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="join"></tbody>
+</table>
+
+
+
+
+@*for smart search *@
+
+@section Scripts{
+    <script id="row" type="template">
+        <tr>
+            <td>
+                {{Name}}
+                @*@Html.DisplayFor(modelItem => item.Name)*@
+            </td>
+            <td>
+                {{FullData}}
+                @*@Html.DisplayFor(modelItem => item.FullData)*@
+            </td>
+            <td>
+                {{Duration}}
+                @*@Html.DisplayFor(modelItem => item.Duration)*@
+            </td>
+            <td>
+                {{Price}}
+                @*@Html.DisplayFor(modelItem => item.Price)*@
+            </td>
+            <td>
+                {{Available_Members}}
+                @*@Html.DisplayFor(modelItem => item.Available_Members)*@
+            </td>
+            <td>
+                {{Description}}
+                @*@Html.DisplayFor(modelItem => item.Description)*@
+            </td>
+        </tr>
+    </script>
+    <script>
+        $(function () {
+
+            // לשנות את המשתנה שנכנס לפי id , price...
+            $('#Name,#price,#available_members').keyup(function () {
+                $.ajax(
+                    {
+                        type: "Get",
+                        dataType: "json",
+
+                        url: "/Workshops/Filter/?name=" + $(Name).val() + '&price=' + $(price).val() + '&available_members=' + $(available_members).val(),
+                        success: function (data) {
+                            $('#workshop_table tr').remove();
+                            var temp = $.trim($('#row'));
+                            console.log(data);
+                            console.log(temp);
+                            $.each(data, function (index, element) {
+                                console.log(element);
+                                $('#workshop_table').append(
+                                    `<tr><td>${element.name}</td><td>${element.fullData}</td><td>${element.duration}</td><td>${element.price}</td><td>${element.available_Members}</td><td>${element.description}</td>`
+                                )
+                            });
+                        }
+                    }
+                );
+            }
+            )
+        }
+
+        )
+    </script>
+}
