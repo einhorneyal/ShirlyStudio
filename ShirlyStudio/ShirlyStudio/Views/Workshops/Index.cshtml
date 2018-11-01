@@ -165,23 +165,49 @@
                 dataType: "json",
                 url: "/Workshops/GetRecordsMonthly",
                 success: function (data) {
-                    console.log(data);
                     var ctx = document.getElementById('myChart').getContext('2d');
+
+             /*       Object.keys(data).forEach(function (key) {
+                        console.log('key name: ', key);
+                        console.log('value: ', data[key].name);
+                    });
+                    */
+
                     var chart = new Chart(ctx, {
                         // The type of chart we want to create
                         type: 'line',
 
+                       
                         // The data for our dataset
                         data: {
 
-                            labels: [data[0].name, data[1].name, data[2].name, data[3].name, data[4].name],
+                            function() {
+                                var list = [];
+
+                                Object.keys(data).forEach(function (key) {
+                                    list.push(data[key].name)
+                                })
+                            }
+                                labels: list,
+
+
+
+                                
                             datasets: [{
                                 label: "סדנאות לפי מחירים",
                                 backgroundColor: 'rgb(255, 99, 132)',
                                 borderColor: 'rgb(255, 99, 132)',
-                                data: [data[0].price, data[1].price, data[2].price, data[3].price, data[4].price],
+
+                                function() {
+                                    var list2 = [];
+
+                                    Object.keys(data).forEach(function (key) {
+                                        list.push(data[key].price)
+                                    })},
+
+                                    data: list2
                             }]
-                        }
+                        },
 
                         // Configuration options go here
                         //options: {}
@@ -203,7 +229,6 @@
                 dataType: "json",
                 url: "/Workshops/Getfreeplace",
                 success: function (data) {
-                    console.log(data);
                     var ctx = document.getElementById('myChart2').getContext('2d');
                     var chart = new Chart(ctx, {
                         // The type of chart we want to create
@@ -211,12 +236,12 @@
 
                         // The data for our dataset
                         data: {
-                            labels: [data[0].name, data[1].name, data[2].name, data[3].name, data[4].name],
+                            labels: [data[0].name, data[1].name, data[2].name],
                             datasets: [{
                                 label: "סדנאות לפי מקומות פנויים",
                                 backgroundColor: 'rgb(152, 99, 132)',
                                 borderColor: 'rgb(152, 99, 132)',
-                                data: [data[0].available_Members, data[1].available_Members, data[2].available_Members, data[3].available_Members, data[4].available_Members],
+                                data: [data[0].available_Members, data[1].available_Members, data[2].available_Members],
                             }]
                         }
 
