@@ -21,16 +21,29 @@ namespace ShirlyStudio.Controllers
             _context = context;
         }
 
+        //for graphs
         [HttpGet]
         public JsonResult GetRecordsMonthly()
         {
             return Json(_context.Workshop.OrderBy(n => n.FullData).ToList());
         }
+        //for graphs
         [HttpGet]
         public JsonResult Getfreeplace()
         {
             return Json(_context.Workshop.OrderBy(n => n.FullData).ToList());
         }
+
+        //join function
+        public JsonResult Tryjoin()
+        {
+            var list =  from Workshop in _context.Workshop
+                        join Customer in _context.Customer on Workshop.Name equals Customer.Name
+                        select new { Name=Workshop.Name ,Workshop.Price };
+            var result = list.GroupBy(w => w.Name).Select(t => new { id =t.Key, counter = t.Sum(u => u.Price) }).OrderByDescending(c=> c.counter).Take(5);
+            return Json(result.ToList());
+        }
+
         public async Task<IActionResult> Index()
         {
 
